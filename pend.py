@@ -2,7 +2,7 @@ import pygame
 import sys
 from math import sin, cos, radians
 import conexao
-
+import struct
 
 # Inicialização do Pygame
 pygame.init()
@@ -37,12 +37,12 @@ while running:
             running = False
 
     # Atualizar lógica do pêndulo
-    # (Substitua isto com a lógica de atualização de ângulo baseada nos seus dados)
 
     # Recebe informação de ângulo com dados do socket
     data, addr = conn.recvfrom(1024)
     
-    pendulum_angle = int(data.decode())
+    angleSimulink = struct.unpack('d',data)
+    pendulum_angle = angleSimulink[0]
     print(pendulum_angle)
     #if pendulum_angle >= 360:
         #pendulum_angle = 0
